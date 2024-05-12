@@ -10,7 +10,7 @@ using std::cin; using std::cout;
 class Die
 {
 public:
-    int roll() {return (rand() % sides) + 1;}
+    int roll();
 
 private:
     int sides{6};
