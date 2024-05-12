@@ -1,6 +1,7 @@
 //
 #include "die.h"
 #include "roll.h"
+#include "shooter.h"
 
 int main() 
 {
@@ -16,6 +17,13 @@ int main()
 	Die die1;
 	Die die2;
 	Roll roll(die1, die2);
+	Shooter shooter;
+
+	shooter.throw_dice(die1, die2);
+	shooter.throw_dice(die1, die2);
+	shooter.throw_dice(die1, die2);
+	shooter.display_rolled_values();
+
 
 	roll.roll_dice();
 	cout << "Rolled value (of two die): " << roll.roll_value() << "\n"; //std::endl
