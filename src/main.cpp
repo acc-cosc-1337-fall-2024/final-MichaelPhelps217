@@ -2,6 +2,8 @@
 #include "die.h"
 #include "roll.h"
 #include "shooter.h"
+#include "come_out_phase.h"
+#include "point_phase.h"
 
 int main() 
 {
@@ -16,16 +18,34 @@ int main()
 
 	Die die1;
 	Die die2;
-	Roll roll(die1, die2);
 	Shooter shooter;
+	Roll* roll;
+	int rolled_value;
+	ComeOutPhase cop;
+	Phase::RollOutcome ro;
+	do
+	{
+		roll = shooter.throw_dice(die1, die2);
+		rolled_value = roll->roll_value();
+		ro = cop.get_outcome(roll);
+		cout << "Rolled Value: " << rolled_value << "\n";
+	} while(ro == Phase::RollOutcome::natural || ro == Phase::RollOutcome::craps);
 
-	shooter.throw_dice(die1, die2);
-	shooter.throw_dice(die1, die2);
-	shooter.throw_dice(die1, die2);
+	cout << "Start of point phase: " << rolled_value << "\n";
+	cout << "Roll until rolled value or 7 is rolled\n";
+
+	int point = roll->roll_value();
+	PointPhase pp = PointPhase(point);
+
+	do
+	{
+		roll = shooter.throw_dice(die1, die2);
+		rolled_value = roll->roll_value();
+		ro = pp.get_outcome(roll);
+		cout << "Rolled Value: " << rolled_value << "\n";
+	} while(ro != Phase::RollOutcome::seven_out && ro != Phase::RollOutcome::nopoint);
+
+	cout << "End of point phase: " << rolled_value << "\n";
 	shooter.display_rolled_values();
-
-
-	roll.roll_dice();
-	cout << "Rolled value (of two die): " << roll.roll_value() << "\n"; //std::endl
     return 0;
 }
