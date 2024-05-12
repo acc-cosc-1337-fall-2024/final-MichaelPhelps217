@@ -9,13 +9,6 @@ int main()
 {
 	srand(time(0));
 
-	/*
-    int result1 = die1.roll();
-	int result2 = die2.roll();
-    cout << "1D6 dice1 roll result: " << result1 << "\n"; //std::endl
-	cout << "1D6 dice2 roll result: " << result2 << "\n"; //std::endl
-	*/
-
 	Die die1;
 	Die die2;
 	Shooter shooter;
@@ -32,7 +25,7 @@ int main()
 	} while(ro == Phase::RollOutcome::natural || ro == Phase::RollOutcome::craps);
 
 	cout << "Start of point phase: " << rolled_value << "\n";
-	cout << "Roll until rolled value or 7 is rolled\n";
+	cout << "Roll until " << rolled_value << " or 7 is rolled\n";
 
 	int point = roll->roll_value();
 	PointPhase pp = PointPhase(point);
@@ -43,7 +36,7 @@ int main()
 		rolled_value = roll->roll_value();
 		ro = pp.get_outcome(roll);
 		cout << "Rolled Value: " << rolled_value << "\n";
-	} while(ro != Phase::RollOutcome::seven_out && ro != Phase::RollOutcome::nopoint);
+	} while(ro != Phase::RollOutcome::seven_out && ro != Phase::RollOutcome::point);
 
 	cout << "End of point phase: " << rolled_value << "\n";
 	shooter.display_rolled_values();
