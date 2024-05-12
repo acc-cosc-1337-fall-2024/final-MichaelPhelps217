@@ -10,3 +10,9 @@ int Roll::roll_value() const
 {
     return rolled_value;
 }
+
+//this is for testing class Phase
+void Roll::set_rolled_value(int value)
+{
+    rolled_value = value;
+}

@@ -15,6 +15,9 @@ public:
     void roll_dice();
     int roll_value() const;
 
+    //this is for testing class Phase
+    void set_rolled_value(int);
+
 private:
     Die& die1;
     Die& die2;
